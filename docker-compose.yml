@@ -1,0 +1,59 @@
+version: "3.9"
+
+services:
+  app:
+    build:
+      context: ./app
+      dockerfile: Dockerfile
+    container_name: propcontrol-app
+    env_file:
+      - .env
+    ports:
+      - "3000:3000"
+    depends_on:
+      - supabase-db
+      - supabase-rest
+      - supabase-auth
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3000/api/health"]
+      interval: 30s
+      timeout: 5s
+      retries: 5
+    networks:
+      - propcontrol-net
+
+  # Supabase core services (imported from infra/supabase)
+  supabase-db:
+    extends:
+      file: infra/supabase/docker-compose.supabase.yml
+      service: supabase-db
+    networks:
+      - propcontrol-net
+
+  supabase-rest:
+    extends:
+      file: infra/supabase/docker-compose.supabase.yml
+      service: supabase-rest
+    networks:
+      - propcontrol-net
+
+  supabase-auth:
+    extends:
+      file: infra/supabase/docker-compose.supabase.yml
+      service: supabase-auth
+    networks:
+      - propcontrol-net
+
+  supabase-storage:
+    extends:
+      file: infra/supabase/docker-compose.supabase.yml
+      service: supabase-storage
+    networks:
+      - propcontrol-net
+
+networks:
+  propcontrol-net:
+    driver: bridge
+
+volumes:
+  supabase-db-data:

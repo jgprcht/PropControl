@@ -1,0 +1,12 @@
+{
+  "app.title": "PropControl",
+  "app.subtitle": "Self-hosted Immobilienverwaltung und Finanzkontrolle",
+  "nav.dashboard": "Übersicht",
+  "nav.properties": "Objekte",
+  "nav.reporting": "Reporting",
+  "nav.tax": "Steuer",
+  "layout.health.ok": "Systemstatus: Betriebsbereit",
+  "modules.heading": "Module",
+  "modules.status.enabled": "aktiviert",
+  "modules.status.disabled": "deaktiviert"
+}
